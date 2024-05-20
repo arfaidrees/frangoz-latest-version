@@ -29,8 +29,8 @@ class MapSampleState extends State<MapSample> {
   var uuid = const Uuid();
   String _sessionToken = '1234567890';
   List<dynamic> _placeList = [];
-  LatLng geoFenceCenter = LatLng(32.4770, 74.4496); // Define geofence center here
-  double geoFenceRadius = 300; // Define geofence radius here
+  LatLng geoFenceCenter = LatLng(32.4770, 74.4496);
+  double geoFenceRadius = 300;
 
   @override
   void initState() {

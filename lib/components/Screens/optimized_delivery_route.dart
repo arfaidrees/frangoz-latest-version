@@ -13,8 +13,8 @@ import 'package:flutter/services.dart' show rootBundle;
 class Routes extends StatefulWidget {
   final List<String> addresses;
   final LatLng currentLocation;
-  final LatLng geoFenceCenter; // New variable for geofence center
-  final double geoFenceRadius; // New variable for geofence radius
+  final LatLng geoFenceCenter;
+  final double geoFenceRadius;
 
   const Routes({required this.addresses, required this.currentLocation, required this.geoFenceCenter, required this.geoFenceRadius});
 
@@ -37,14 +37,14 @@ class RoutesState extends State<Routes> {
   double _totalDistance = 0.0;
   double _coveredDistance = 0.0;
   List<LatLng> _route = [];
-  bool isInsideGeofence = false; // New variable for geofence status
-  Set<Circle> circles = Set(); // New variable for geofence circle
+  bool isInsideGeofence = false;
+  Set<Circle> circles = Set();
 
   @override
   void initState() {
     super.initState();
     _addMarkers();
-    _initializeGeofencing(); // Initialize geofencing logic
+    _initializeGeofencing();
   }
 
   void _initializeGeofencing() {
@@ -254,16 +254,13 @@ class RoutesState extends State<Routes> {
         widget.geoFenceCenter.longitude,
       );
 
-      // Check if the user is currently inside the geofence
       bool insideNow = distance <= widget.geoFenceRadius;
 
-      // Only update state and show Snackbar if the status changes
       if (insideNow != isInsideGeofence) {
         setState(() {
           isInsideGeofence = insideNow;
         });
 
-        // Show Snackbar if the user crosses the geofence boundary
         if (!isInsideGeofence) {
           showSnackbar(isInsideGeofence);
         }
